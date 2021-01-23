@@ -1,8 +1,8 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header reveal bordered class="bg-green-10">
-      <div style="width: 100%;display: grid;justify-items: center">
-        <q-toolbar style="height: 56px; max-width: 1440px;">
+    <q-header reveal bordered class="bg-grey-9">
+      <div style="width: 100%; display: grid; justify-items: center">
+        <q-toolbar style="height: 50px; max-width: 1000px">
           <span>
             <q-toolbar-title>
               <q-btn
@@ -11,16 +11,17 @@
                 no-wrap
                 tag="a"
                 :to="{ name: 'home' }"
+                size="lg"
                 class="text-weight-bold cursor-pointer text-dark"
-                color="red"
+                color="grey-5"
               >
-               BRAND
+                BRAND
               </q-btn>
             </q-toolbar-title>
           </span>
 
           <q-space />
-          <div class="gt-sm flex no-wrap justify-end">
+          <div class="hidden gt-sm flex no-wrap justify-end">
             <template v-for="(link, idx) in navLinks">
               <q-btn
                 :key="idx"
@@ -54,11 +55,9 @@ export default {
   name: "MainLayout",
   data() {
     return {
-      navLinks: [
-        { label: "all patients", to: "#" },
-      ]
+      navLinks: [{ label: "all patients", to: "#" }],
     };
-  }
+  },
 };
 </script>
 
