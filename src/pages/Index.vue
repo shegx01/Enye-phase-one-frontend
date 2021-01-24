@@ -32,8 +32,8 @@
             outline
             dense
           >
-            <div class="q-pa-xs">
-              change
+            <div class="q-pa-xs text-body2">
+              change filter
               <q-icon class="q-pl-xs" name="mdi-filter-variant" />
             </div>
             <q-menu content-class="no-border-radius">
@@ -67,9 +67,9 @@
                           <q-btn
                             flat
                             dense
-                            size="sm"
                             @click="handleCurrentSelectedFilterValue(item)"
-                            class="text-body2 text-grey-7 text-capitalize"
+                            class="text-body2 text-grey-7 "
+                            :class="item === 'jcb' ? 'text-uppercase' : 'text-capitalize'"
                           >
                             {{ item }}
                           </q-btn>
@@ -83,106 +83,12 @@
           </q-btn>
         </div>
       </div>
-      <div class="q-my-lg flex items-center bg-white q-pa-lg">
+      <div
+        class="q-my-lg flex justify-center items-center bg-white q-pa-lg"
+        style="min-height: 60vh"
+      >
         <div class="column">
-          <q-card class="q-pb-xs bg-grey-1 shadow-1 no-border-radius">
-              <q-item dense class="">
-                <div>
-                  <div class="flex items-center">
-                    <q-avatar
-                      size="4rem"
-                      font-size="4rem"
-                    >
-                      <q-icon color="grey-4"  name="mdi-account-circle" />
-                    </q-avatar>
-                    <div class="column q-pl-xs ">
-                      <span class="text-body2 text-grey-5">@OZXgvts</span>
-                      <span class="q-pt-xs text-body1 text-grey-9">Torey Mitchell</span>
-                    </div>
-                  </div>
-                  <div class="q-pb-xs">
-                    <q-icon color="grey-4" name="mdi-email" />
-                    <span class="text-body2 q-pl-xs text-grey-9">agsCCcj@RIdJmBO.com</span>
-                  </div>
-                </div>
-
-              </q-item>
-              <q-item dense class="flex no-wrap">
-                <div>
-                  <q-card bordered class="q-pa-sm shadow-0">
-                    <div>
-                      <div class="q-pa-xs text-uppercase text-body2 text-weight-bold text-grey-7"
-                           style="letter-spacing: 1px">basic info</div>
-                      <q-separator color="grey-2"  class="q-my-xs" />
-                      <div class="q-pb-xs">
-                        <q-icon color="grey-4" size="1rem" name="mdi-gender-male-female-variant" />
-                        <span class="text-body2 q-pl-xs text-grey-9 text-capitalize">female</span>
-                      </div>
-                      <div class="q-pb-xs">
-                        <q-icon color="grey-4" name="mdi-cellphone" />
-                        <span class="text-body2 q-pl-xs text-grey-9">810-362-4975</span>
-                      </div>
-                      <div class="q-pb-xs">
-                        <q-icon color="grey-4" name="mdi-web" />
-                        <span class="text-body2 q-pl-xs text-grey-9">qBYSTHE.com</span>
-                        <a href="https://dfwnotr.com/"
-                           target="_blank"
-                            class="q-ml-sm q-px-xs text-grey-7 rounded-borders"
-                           style="text-decoration: none; border: 1px solid darkgrey"
-                        >visit site</a>
-                      </div>
-                    </div>
-                  </q-card>
-                </div>
-                <div class="q-ml-sm">
-                  <q-card bordered class="q-pa-sm shadow-0">
-                    <div>
-                      <div class="q-pa-xs text-uppercase text-body2 text-weight-bold text-grey-7"
-                           style="letter-spacing: 1px">addresses</div>
-                      <q-separator color="grey-2"  class="q-my-xs" />
-                      <div class="q-pb-xs">
-                        <q-icon color="grey-4" name="mdi-desktop-classic" />
-                        <span class="text-body2 q-pl-xs text-grey-9">******5e:34:b7
-                        <q-tooltip content-class="no-border-radius">mac address</q-tooltip>
-                        </span>
-                      </div>
-                      <div class="q-pb-xs flex items-center">
-                        <q-icon color="grey-4" name="mdi-map-marker-multiple" />
-                        <div class="flex no-wrap q-pl-xs ">
-                           <span class="text-body2 text-grey-9">LAT: 35.934196
-                        </span>
-                          <span class="q-ml-sm text-body2 text-grey-9">LONG: 124.94852
-                        </span>
-                        </div>
-
-                      </div>
-                    </div>
-                  </q-card>
-                </div>
-                <div class="q-ml-sm">
-                  <q-card bordered class="q-pa-sm shadow-0">
-                    <div>
-                      <div class="q-pa-xs text-uppercase text-body2 text-weight-bold text-grey-7"
-                           style="letter-spacing: 1px">payment details</div>
-                      <q-separator color="grey-2"  class="q-my-xs" />
-                      <div class="q-pb-xs">
-                        <q-icon color="grey-4" name="mdi-credit-card" />
-                        <span class="text-body2 q-pl-xs text-grey-9">*********7274
-                        </span>
-                      </div>
-                      <q-card flat bordered class="text-body2 q-pa-sm bg-yellow-1">
-                        <div class="">
-                           <span class="text-uppercase text-weight-bold text-grey-9 q-pa-xs">discover</span> card was linked to your account <span class="q-ml-xs text-red-7 q-px-xs rounded-borders" style="border: 1px solid red">remove</span>
-                        </div>
-                        <span class="text-uppercase text-weight-bold text-grey-9 q-pa-xs">paypal</span> was set as prefered payment method <span class="q-ml-xs text-white q-px-xs bg-green-5 rounded-borders" style="border: 1px solid mediumseagreen">change</span>
-
-                      </q-card>
-
-                    </div>
-                  </q-card>
-                </div>
-              </q-item>
-          </q-card>
+          <PatientInfo />
         </div>
       </div>
     </div>
@@ -190,8 +96,12 @@
 </template>
 
 <script>
+import PatientInfo from "../components/PatientInfo";
 export default {
   name: "PageIndex",
+  components: {
+    PatientInfo,
+  },
   data() {
     return {
       currentSelectedFilter: "",
@@ -199,8 +109,11 @@ export default {
       paymentFilters: {
         gender: ["male", "female", "unspecified"],
 
-        "payment method": ["discover", "visa", "mastercard"],
+        'card type': ["discover", "visa", "mastercard", 'jcb'],
       },
+      isLoading: true,
+      responseData: {},
+      dataError: "",
     };
   },
   methods: {
@@ -215,17 +128,66 @@ export default {
         this.currentSelectedFilter = "gender";
         this.currentSelectedValue = "unspecified";
       } else if (value.toLowerCase() === "discover") {
-        this.currentSelectedFilter = "payment method";
+        this.currentSelectedFilter = "card type";
         this.currentSelectedValue = "discover";
       } else if (value.toLowerCase() === "visa") {
-        this.currentSelectedFilter = "payment method";
+        this.currentSelectedFilter = "card type";
         this.currentSelectedValue = "visa";
+      } else if (value.toLowerCase() === "jcb") {
+        this.currentSelectedFilter = "card type";
+        this.currentSelectedValue = "jcb";
       } else {
-        this.currentSelectedFilter = "payment method";
+        this.currentSelectedFilter = "card type";
         this.currentSelectedValue = "mastercard";
       }
     },
+    handleFilteredPatient(selectedFilter, selectedValue) {
+      if (selectedFilter === "gender") {
+        return this.responseData.records.profiles.filter(
+          (patient) => patient['Gender'].toLowerCase() === selectedValue
+        );
+      }
+      if (selectedFilter === "card type") {
+        return this.responseData.records.profiles.filter(
+          (patient) => patient["CreditCardType"].toLowerCase() === selectedValue
+        );
+      }
+    },
   },
+  created() {
+    this.$api
+      .get("/")
+      .then((response) => {
+        this.responseData = response.data;
+        this.isLoading = false;
+      })
+      .catch((error) => {
+        //    should a request made and no response was received
+        if (error.request) this.dataError = error.message;
+        // request with different status other than 200
+        else if (error.response) this.dataError = error.response.data;
+      });
+  },
+  computed: {
+        patientList() {
+            let result = [];
+            if (this.responseData.records === undefined)  return result;
+            if (
+                this.currentSelectedFilter === '' &&
+                this.currentSelectedValue === ''){
+                result =  this.responseData.records.profiles;
+                return result
+            }
+            else {
+                result =  this.handleFilteredPatient(
+                    this.currentSelectedFilter,
+                    this.currentSelectedValue
+                );
+            }
+            return result
+
+        },
+    },
 };
 </script>
 
