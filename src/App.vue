@@ -10,6 +10,9 @@ export default {
 </script>
 
 <style lang="stylus">
+  .border-primary
+    border 1px solid $grey-4
+
  .q-field--dense .q-field__control
    height 32px
 .q-toolbar
