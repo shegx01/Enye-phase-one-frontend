@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf">
     <q-header reveal bordered class="bg-grey-9">
       <div style="width: 100%; display: grid; justify-items: center">
-        <q-toolbar style="height: 50px; max-width: 1000px">
+        <q-toolbar style="height: 60px; max-width: 1000px">
           <span>
             <q-toolbar-title>
               <q-btn

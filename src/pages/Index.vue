@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex justify-center q-pt-xl bg-grey-1">
     <div class="full-width q-px-md" style="max-width: 1000px">
-      <div class="flex items-center bg-white q-pa-lg rounded-borders">
+      <q-card class="flex items-center bg-grey-1 q-pa-lg rounded-borders shadow-3">
         <div class="flex">
           <q-input
             dense
@@ -115,7 +115,7 @@
             </q-menu>
           </q-btn>
         </div>
-      </div>
+      </q-card>
       <div
         class="q-my-lg flex justify-center items-center bg-white q-pa-lg"
         style="min-height: 60vh"

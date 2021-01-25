@@ -1,5 +1,5 @@
 <template>
-  <q-card bordered class="q-pt-xs bg-grey-1 shadow-0">
+  <q-card class="q-pt-xs bg-grey-1 shadow-1">
     <q-item dense class="">
       <div>
         <div class="flex items-center">
