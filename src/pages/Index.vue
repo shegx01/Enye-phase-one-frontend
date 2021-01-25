@@ -121,13 +121,28 @@
         style="min-height: 60vh"
       >
         <div class="column">
-          <div v-if="paginatedPatientsList.length > 0" >
+<!--    render if loading-->
+          <q-dialog v-model="isLoading">
+            <div  class="column items-center shadow-0">
+              <q-spinner-rings size="6rem" color="grey-9" />
+              <div class="q-mt-sm text-capitalize text-grey-9 text-body1">loading your data...</div>
+            </div>
+          </q-dialog>
+
+<!--     render only if data error-->
+          <q-card flat v-if="dataError"  class=" bg-grey-1 q-pa-xl column items-center">
+            <q-icon size="5rem" color="warning" name="mdi-information-outline" />
+            <div class="q-mt-sm text-capitalize text-grey-6 text-body1">an error occured while processing your request</div>
+          </q-card>
+
+<!--          else render this-->
+          <div v-else class="" >
             <template v-for="(patient, idx) in paginatedPatientsList">
               <PatientInfo :Key="idx" :patient="patient" :class="idx === paginatedPatientsList.length-1 ? '' : 'q-mb-lg'" />
             </template>
           </div>
-          <div>
-            <div class="q-py-xl flex justify-end">
+          <div v-if="paginatedPatientsList.length > 0">
+            <div  class="q-py-xl flex justify-end">
               <q-pagination
                 v-model="currentPageNum"
                 ellipses
@@ -140,6 +155,18 @@
               />
             </div>
           </div>
+          <q-card
+            v-if="paginatedPatientsList.length === 0"
+            class="bg-grey-1 shadow-0"
+          >
+            <q-card-section class="column items-center">
+              <q-icon color="grey-5" size="5rem" name="mdi-magnify" />
+              <div class="column items-center q-mt-sm text-capitalize text-grey-6 text-body1">
+                <span>cannot find anything here</span>
+                <span class="q-mt-sm">please use search or filter functionality</span>
+              </div>
+            </q-card-section>
+          </q-card>
         </div>
       </div>
     </div>
@@ -148,7 +175,6 @@
 
 <script>
 import PatientInfo from "../components/PatientInfo";
-
 export default {
   name: "PageIndex",
   components: {

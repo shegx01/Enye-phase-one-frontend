@@ -3,7 +3,7 @@
     <q-item dense class="">
       <div>
         <div class="flex items-center">
-          <q-avatar text-color="grey-2"  icon="mdi-account-circle" bordered size="4rem" font-size="4rem">
+          <q-avatar text-color="grey-5"  icon="mdi-account-circle" bordered size="4rem" font-size="4rem">
 <!--            <q-icon color="grey-4" name="mdi-account-circle" />-->
           </q-avatar>
           <div class="column q-pl-xs">
