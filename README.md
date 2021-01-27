@@ -1,11 +1,13 @@
-# peerless innovation (peerless-innov)
+# Enye assignment (phase one frontend)
 
-peerless static frontend
+##phase one frontend assigment
 
 ## Install the dependencies
 
+###changed into app root directory by cd command
+###and use yarn after cloning the repo
 ```bash
-yarn
+cd enye-phase-one-frontend-app && yarn
 ```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
