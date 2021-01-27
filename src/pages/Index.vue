@@ -1,7 +1,9 @@
 <template>
   <q-page class="flex justify-center q-pt-xl bg-grey-1">
     <div class="full-width q-px-md" style="max-width: 1000px">
-      <q-card class="flex items-center bg-grey-1 q-pa-lg rounded-borders shadow-3">
+      <q-card
+        class="flex items-center bg-grey-1 q-pa-lg rounded-borders shadow-3"
+      >
         <div class="flex">
           <q-input
             dense
@@ -121,40 +123,65 @@
         style="min-height: 60vh"
       >
         <div class="column">
-<!--    render if loading-->
+          <!--    render if loading-->
           <q-dialog v-model="isLoading">
-            <div  class="column items-center shadow-0">
+            <div class="column items-center shadow-0">
               <q-spinner-rings size="6rem" color="grey-9" />
-              <div class="q-mt-sm text-capitalize text-grey-9 text-body1">loading your data...</div>
+              <div class="q-mt-sm text-capitalize text-grey-9 text-body1">
+                loading your data...
+              </div>
             </div>
           </q-dialog>
 
-<!--     render only if data error-->
-          <q-card flat v-if="dataError"  class=" bg-grey-1 q-pa-xl column items-center">
-            <q-icon size="5rem" color="warning" name="mdi-information-outline" />
-            <div class="q-mt-sm text-capitalize text-grey-6 text-body1">an error occured while processing your request</div>
+          <!--     render only if data error-->
+          <q-card
+            flat
+            v-if="dataError"
+            class="bg-grey-1 q-pa-xl column items-center"
+          >
+            <q-icon
+              size="5rem"
+              color="warning"
+              name="mdi-information-outline"
+            />
+            <div class="q-mt-sm text-capitalize text-grey-6 text-body1">
+              an error occured while processing your request
+            </div>
           </q-card>
 
-<!--          else render this-->
-          <div v-else class="" >
+          <!--          else render this-->
+          <div v-else class="">
             <template v-for="(patient, idx) in paginatedPatientsList">
-              <PatientInfo :Key="idx" :patient="patient" :class="idx === paginatedPatientsList.length-1 ? '' : 'q-mb-lg'" />
+              <PatientInfo
+                :Key="idx"
+                :patient="patient"
+                :class="
+                  idx === paginatedPatientsList.length - 1 ? '' : 'q-mb-lg'
+                "
+              />
             </template>
           </div>
           <div v-if="paginatedPatientsList.length > 0">
-            <div>
-            </div>
-            <div  class="q-py-xl flex justify-end">
-              <q-pagination
-                v-model="currentPageNum"
-                ellipses
-                padding="xs"
-                color="grey-9"
-                unelevated
-                input-class="shadow-0"
-                :max="pageCount"
-                :direction-links="true"
-              />
+            <div class="column items-end">
+              <div
+                class="q-mb-sm q-mt-lg q-mr-sm text-grey-9 text-italic text-body2"
+              >
+                <span
+                  >showing {{ totalViewed }} of {{ patientsList.length }}</span
+                >
+              </div>
+              <div>
+                <q-pagination
+                  v-model="currentPageNum"
+                  ellipses
+                  padding="xs"
+                  color="grey-9"
+                  unelevated
+                  input-class="shadow-0"
+                  :max="pageCount"
+                  :direction-links="true"
+                />
+              </div>
             </div>
           </div>
           <q-card
@@ -163,9 +190,13 @@
           >
             <q-card-section class="column items-center">
               <q-icon color="grey-5" size="5rem" name="mdi-magnify" />
-              <div class="column items-center q-mt-sm text-capitalize text-grey-6 text-body1">
+              <div
+                class="column items-center q-mt-sm text-capitalize text-grey-6 text-body1"
+              >
                 <span>cannot find anything here</span>
-                <span class="q-mt-sm">please use search or filter functionality</span>
+                <span class="q-mt-sm"
+                  >please use search or filter functionality</span
+                >
               </div>
             </q-card-section>
           </q-card>
@@ -230,7 +261,10 @@ export default {
       if (selectedFilter === "gender") {
         return inputData.filter((patient) => {
           if (selectedValue === "unspecified")
-            return patient["Gender"].toLowerCase() !== "male" && patient["Gender"].toLowerCase() !== "female";
+            return (
+              patient["Gender"].toLowerCase() !== "male" &&
+              patient["Gender"].toLowerCase() !== "female"
+            );
           return patient["Gender"].toLowerCase() === selectedValue;
         });
       }
@@ -264,27 +298,6 @@ export default {
       this.currentSelectedValue = "";
       this.currentSelectedFilter = "";
     },
-  },
-  created() {
-    this.$api
-      .get("/")
-      .then((response) => {
-        this.responseData = response.data;
-        this.defaultPatientsList = response.data.records.profiles;
-        this.isLoading = false;
-      })
-      .catch((error) => {
-        //    should a request made and no response was received
-        if (error.request) {
-          this.isLoading = false;
-          this.dataError = error.message;
-        }
-        // request with different status other than 200
-        else if (error.response) {
-          this.isLoading = false;
-          this.dataError = error.response.data;
-        }
-      });
   },
   computed: {
     patientsList: {
@@ -324,6 +337,33 @@ export default {
     pageCount() {
       return Math.ceil(this.patientsList.length / this.perPage);
     },
+    totalViewed() {
+      return this.currentPageNum === this.pageCount
+        ? (this.pageCount - 1) * this.perPage +
+            this.paginatedPatientsList.length
+        : this.currentPageNum * this.perPage;
+    },
+  },
+  created() {
+    this.$api
+      .get("/")
+      .then((response) => {
+        this.responseData = response.data;
+        this.defaultPatientsList = response.data.records.profiles;
+        this.isLoading = false;
+      })
+      .catch((error) => {
+        //    should a request made and no response was received
+        if (error.request) {
+          this.isLoading = false;
+          this.dataError = error.message;
+        }
+        // request with different status other than 200
+        else if (error.response) {
+          this.isLoading = false;
+          this.dataError = error.response.data;
+        }
+      });
   },
 };
 </script>
