@@ -142,6 +142,8 @@
             </template>
           </div>
           <div v-if="paginatedPatientsList.length > 0">
+            <div>
+            </div>
             <div  class="q-py-xl flex justify-end">
               <q-pagination
                 v-model="currentPageNum"
@@ -156,7 +158,7 @@
             </div>
           </div>
           <q-card
-            v-if="paginatedPatientsList.length === 0"
+            v-if="paginatedPatientsList.length === 0 && !isLoading"
             class="bg-grey-1 shadow-0"
           >
             <q-card-section class="column items-center">
